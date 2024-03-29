@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 // Creating a schema for the user
 const userSchema = new Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
     },
@@ -20,7 +20,12 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["employee", "HR"],
+      enum: ["employee", "manager"],
+      required: true,
+    },
+    gender: {
+      type: String,
+      enum: ["male", "female"],
       required: true,
     },
     status: {
@@ -28,6 +33,18 @@ const userSchema = new Schema(
       enum: ["onLeave", "working"],
       default: "working",
     },
+    shifts: [
+      {
+        startTime: {
+          type: String,
+          required: true,
+        },
+        endTime: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 )
