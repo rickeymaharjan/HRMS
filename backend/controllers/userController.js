@@ -1,6 +1,12 @@
 const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
 
 const User = require("../models/userModel")
+
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.SECRET, { expiresIn: "3d" })
+}
 
 // Getting all users
 const getAll = (req, res) => {
@@ -38,16 +44,20 @@ const getUser = (req, res) => {
 }
 
 // Creating a user
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   const { username, email, password, gender } = req.body
   const role = "employee"
-  const shifts = [{ startTime: "09:00", endTime: "17:00" }]
+  const shifts = { startTime: "09:00", endTime: "17:00" }
   const status = "working"
+
+  // Generate salt and hash the password
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
 
   const newUser = new User({
     username,
     email,
-    password,
+    password: hashedPassword,
     gender,
     role,
     status,
@@ -109,4 +119,39 @@ const updateUser = (req, res) => {
     })
 }
 
-module.exports = { getAll, getUser, createUser, deleteUser, updateUser }
+// Login user
+const loginUser = (req, res) => {
+  const { email, password } = req.body
+  User.login(email, password)
+    .then((user) => {
+      const token = createToken(user.id)
+      return res.status(200).json({ email, token })
+    })
+    .catch((error) => {
+      return res.status(400).json({ error: error.message })
+    })
+}
+
+// Signup user
+const signupUser = (req, res) => {
+  const { username, email, password, gender } = req.body
+
+  User.signup(username, email, password, gender)
+    .then((user) => {
+      const token = createToken(user.id)
+      return res.status(200).json({ email, token })
+    })
+    .catch((error) => {
+      return res.status(400).json({ error: error.message })
+    })
+}
+
+module.exports = {
+  getAll,
+  getUser,
+  createUser,
+  deleteUser,
+  updateUser,
+  loginUser,
+  signupUser,
+}
