@@ -11,3 +11,57 @@
 .sidebar {
   background-color: #f9fafb;
 }
+
+.heading{
+  font-size: 25px;
+  font-weight: 400;
+  padding: 7px;
+}
+
+.line {
+  border-bottom: 1px solid #AFAFAF;
+  margin-bottom: 20px;
+  width: 1245px;
+}
+
+.button-click {
+  border-radius: 110px;
+  height: 36px;
+  width: 145px;
+  margin-top: 64px;
+  margin-left: 2px;
+  align-items: center;
+}
+.welcome-message {
+  display: flex;
+  align-items: center;
+}
+
+.welcome-message img {
+  margin-right: 10px;
+  border-radius: 50px;
+  border: 2px solid #AFAFAF;
+  width: 40px;
+  margin-left: 16px;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px; 
+}
+.welcome-message h2 {
+  font-size: 19px;
+}
+
+.welcome-message h4 {
+  font-size: 13px;
+  color: #AFAFAF;
+  margin-top: -6px;
+}
+
+.date{
+  padding: 16px;
+  font-size: large;
+  margin-top: 25px;
+}
