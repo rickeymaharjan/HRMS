@@ -3,16 +3,20 @@ import Box from '@mui/material/Box';
 import { Typography, TextField, Button, Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import { useLogin } from "../hooks/useLogin"
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const { login, isLoading, error } = useLogin()
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     console.log(email, password)
+    login(email, password)
   }
 
   return (
@@ -66,6 +70,7 @@ const Login = () => {
         }}>
 
           <Typography variant='h1' className='px-14' sx={{marginY: 2}}>Login</Typography>
+          
 
           <form className="w-full px-14" onSubmit={handleSubmit}>
             <TextField
@@ -89,6 +94,14 @@ const Login = () => {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
+          {error && <Typography sx={{
+            padding: "7px",
+            background: "#ffefef",
+            border: "1px solid #e7195a",
+            color: "#e7195a",
+            marginY: "4px",
+            borderRadius: "4px"
+          }}>{error}</Typography>}
 
           <Button type='submit' variant='contained' fullWidth sx={{
             marginY: "15px"
