@@ -8,6 +8,8 @@ const {
   createUser,
   updateUser,
   deleteUser,
+  loginUser,
+  signupUser,
 } = require("../controllers/userController")
 
 // Get all users
@@ -26,9 +28,9 @@ router.delete("/:id", deleteUser)
 router.patch("/:id", updateUser)
 
 // // Login user
-// router.post("/login", loginUser)
+router.post("/login", loginUser)
 
 // // Signup User
-// router.post("/signup", signupUser)
+router.post("/signup", signupUser)
 
 module.exports = router

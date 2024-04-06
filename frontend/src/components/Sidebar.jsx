@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronFirst, LogOut } from "lucide-react";
-import { LayoutDashboard, BarChart3, CircleUserRound, HandCoins, Mail } from "lucide-react";
+import { LayoutDashboard, LogOut, CircleUserRound, HandCoins, Mail } from "lucide-react";
 
 const SidebarItem = ({ icon, text, to }) => {
   const location = useLocation();
