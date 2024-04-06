@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
@@ -8,6 +8,9 @@ import LeaveRequest from "./pages/LeaveRequest";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import NotFound from "./pages/NotFound"
+
+import { useAuthContext } from "./hooks/useAuthContext"
 
 function App() {
 
@@ -22,24 +25,54 @@ function App() {
 
 function Content() {
   const location = useLocation();
-  const hideSidebarOnAuthPages = ["/login", "/signup"].includes(location.pathname);
+  const { user } = useAuthContext();
+
+  // Define an array of all defined routes
+  const definedRoutes = ["/", "/dashboard", "/users", "/payments", "/leave-request", "/login", "/signup"];
+
+  // Check if the current route is defined or not
+  const hideSidebar = !definedRoutes.includes(location.pathname) || ["/login", "/signup"].includes(location.pathname);
 
   return (
     <>
-      {!hideSidebarOnAuthPages && <Sidebar />}
+      {!hideSidebar && <Sidebar />}
       <div className="pages">
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/payments" element={<Payments />} />
-          <Route path="/leave-request" element={<LeaveRequest />} />
+          <Route
+            path="/"
+            element={user ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/dashboard"
+            element={user ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/users"
+            element={user ? <Users /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/payments"
+            element={user ? <Payments /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/leave-request"
+            element={user ? <LeaveRequest /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/dashboard" />}
+          />
+          <Route
+            path="/signup"
+            element={!user ? <Signup /> : <Navigate to="/dashboard" />}
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </>
   );
 }
+
 
 
 export default App;
