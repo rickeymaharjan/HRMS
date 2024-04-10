@@ -4,6 +4,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/users")
 const attendanceRoutes = require("./routes/attendance")
+const activityRoutes = require("./routes/activity")
 
 // Express app
 const app = express()
@@ -25,6 +26,7 @@ app.use(requestLogger)
 // Routes
 app.use("/api/users", userRoutes)
 app.use("/api/attendance", attendanceRoutes)
+app.use("/api/activity", activityRoutes)
 
 app.get("/", (req, res) => {
   return res.json({ hello: "world" })
