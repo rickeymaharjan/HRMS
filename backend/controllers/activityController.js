@@ -4,11 +4,11 @@ const Activity = require("../models/activityModel")
 const createActivity = (req, res) => {
     // const user_id = req.user._id
     const date = new Date()
-    const { type, user_id } = req.body
+    const { activity_type, user_id } = req.body
 
     const newActivity = new Activity ({
         user_id,
-        type,
+        activity_type,
         date
     })
 
