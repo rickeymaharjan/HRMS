@@ -3,6 +3,7 @@ require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/users")
+const attendanceRoutes = require("./routes/attendance")
 
 // Express app
 const app = express()
@@ -23,6 +24,7 @@ app.use(requestLogger)
 
 // Routes
 app.use("/api/users", userRoutes)
+app.use("/api/attendance", attendanceRoutes)
 
 app.get("/", (req, res) => {
   return res.json({ hello: "world" })
