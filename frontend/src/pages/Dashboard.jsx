@@ -4,10 +4,13 @@ import { Activity } from "lucide-react"
 import ActivityLog from "../components/ActivityLog"
 import Calendar from "../components/Calendar"
 import CheckIn from "../components/CheckIn"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 import InfoCard from "../components/InfoCard"
 
 const Dashboard = () => {
+  const { user } = useAuthContext()
+
   return (
     <Box sx={{
       marginX: "0",
@@ -19,7 +22,7 @@ const Dashboard = () => {
       <Box sx={{
         marginY: 4
       }}>
-        <Typography variant="h3">Hello, user</Typography>
+        <Typography variant="h3">Hello, {user.email}</Typography>
         <Typography variant="subtitle2">Role Name</Typography>
       </Box>
 

@@ -11,3 +11,8 @@
 .sidebar {
   background-color: #f9fafb;
 }
+
+.pages {
+  flex: 1;
+  background-color: #f9fafb;
+}
