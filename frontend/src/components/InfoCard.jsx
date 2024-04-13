@@ -1,6 +1,6 @@
 import { Paper, Typography, Box } from "@mui/material"
 
-const InfoCard = ({title, amount}) => {
+const InfoCard = ({title, amount, img}) => {
     return(
         <Paper elevation={0} sx={{
             display: "flex",
@@ -12,17 +12,17 @@ const InfoCard = ({title, amount}) => {
         }}>
             <Box sx={{
                 height: "60px",
-                width: "90px",
+                width: "120px",
                 borderRadius: "40px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center"
                 // backgroundColor: "gray"
 
-            }}>Icon</Box>
+            }}><img width="65" height="65" src={img}/></Box>
             <Box sx={{
             }}>
-                <Typography variant="h2">{amount}</Typography>
+                <Typography variant="h3">{amount}</Typography>
                 <Typography variant="subtitle2">{title}</Typography>
             </Box>
         </Paper>
