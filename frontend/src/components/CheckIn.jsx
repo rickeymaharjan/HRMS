@@ -23,7 +23,7 @@ const CheckIn = () => {
             borderColor: `${buttonColor}`,
             color: `${buttonColor}`,
             '&:hover': {
-                borderColor: `${buttonColor}` // Optional: This maintains transparency even on hover
+                borderColor: `${buttonColor}`
               }
             }}>
             {text}

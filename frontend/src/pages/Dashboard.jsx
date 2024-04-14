@@ -1,6 +1,5 @@
-import { Paper, Typography, Button } from "@mui/material"
+import { Paper, Typography, Button, Avatar } from "@mui/material"
 import { Box, Container } from "@mui/system"
-import { Activity } from "lucide-react"
 import ActivityLog from "../components/ActivityLog"
 import Calendar from "../components/Calendar"
 import CheckIn from "../components/CheckIn"
@@ -24,10 +23,17 @@ const Dashboard = () => {
 
       {/* Welcome message */}
       <Box sx={{
-        marginY: 4
+        marginY: 3,
+        marginBottom: 4,
+        display: "flex",
+        alignItems: "center",
+        gap: 2
       }}>
-        <Typography variant="h3">Hello, {user.username}</Typography>
-        <Typography variant="subtitle2">{capitalizeFirstLetter(user.role)}</Typography>
+        <Avatar sx={{height: "70px", width: "70px"}}/>
+        <Box>
+          <Typography variant="h3">Hello, {user.username}</Typography>
+          <Typography variant="subtitle2">{capitalizeFirstLetter(user.role)}</Typography>
+        </Box>
       </Box>
 
       {/* Check in */}
