@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, LogOut, CircleUserRound, HandCoins, Mail } from "lucide-react";
+import { useLogout } from '../hooks/useLogout';
 
 const SidebarItem = ({ icon, text, to }) => {
   const location = useLocation();
@@ -23,6 +24,12 @@ const SidebarItem = ({ icon, text, to }) => {
 }
 
 const Sidebar = () => {
+  const { logout } = useLogout()
+  const handleLogOut = () => {
+    console.log("Button Clicked")
+    logout()
+  }
+
   return (
     <aside className="h-screen w-72">
       <nav className="sidebar h-full flex flex-col  border-r shadow-sm">
@@ -56,7 +63,7 @@ const Sidebar = () => {
         </ul>
 
         {/* Logout item */}
-        <div className="border-t flex p-3">
+        <div className="border-t flex p-3" onClick={handleLogOut}>
           <SidebarItem icon={<LogOut size={20} />} text="Logout" />
         </div>
       </nav>

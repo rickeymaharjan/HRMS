@@ -35,6 +35,7 @@ const Theme = createTheme({
     },
     subtitle2: {
       fontSize: "0.875rem",
+      color: "gray"
     },
     body1: {
       fontSize: "1rem",
@@ -48,7 +49,7 @@ const Theme = createTheme({
     },
     caption: {
       fontSize: "0.9rem",
-      color: "gray"
+      color: "#707070"
     },
     overline: {
       fontSize: "0.75rem",

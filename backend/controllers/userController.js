@@ -125,7 +125,10 @@ const loginUser = (req, res) => {
   User.login(email, password)
     .then((user) => {
       const token = createToken(user.id)
-      return res.status(200).json({ email, token })
+      const { id, email, shifts, role, gender, username } = user
+      return res
+        .status(200)
+        .json({ id, email, role, shifts, gender, username, token })
     })
     .catch((error) => {
       return res.status(400).json({ error: error.message })

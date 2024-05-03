@@ -17,14 +17,13 @@ const CheckIn = () => {
         <Box sx={{
           marginBottom: 4,
           display: "flex",
-          justifyContent: "flex-end"
         }}>
           <Button variant='outlined' onClick={handleClick}
              sx={{
             borderColor: `${buttonColor}`,
             color: `${buttonColor}`,
             '&:hover': {
-                borderColor: `${buttonColor}` // Optional: This maintains transparency even on hover
+                borderColor: `${buttonColor}`
               }
             }}>
             {text}
