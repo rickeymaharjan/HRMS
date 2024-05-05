@@ -15,7 +15,7 @@ const CheckIn = () => {
 
     return (
         <Box sx={{
-          marginBottom: 4,
+          marginBottom: 3,
           display: "flex",
         }}>
           <Button variant='outlined' onClick={handleClick}

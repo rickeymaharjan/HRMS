@@ -18,7 +18,10 @@ const Dashboard = () => {
     <Box sx={{
       marginX: "0",
       // border: "1px solid black",
-      padding: "40px"
+      height: "100vh",
+      padding: "40px",
+      display: "flex",
+      flexDirection: "column"
     }}>
 
       {/* Welcome message */}
@@ -40,7 +43,7 @@ const Dashboard = () => {
       <CheckIn />
       
       {/* Cards */}
-      <Box className="flex gap-10 mb-10">
+      <Box className="flex gap-6 mb-6">
         <InfoCard title="Total Employees" amount="20" img="icons/team.png"/>
         <InfoCard title="Working" amount="17" img="icons/working.png"/>
         <InfoCard title="On Leave" amount="3" img="icons/leave.png"/>
