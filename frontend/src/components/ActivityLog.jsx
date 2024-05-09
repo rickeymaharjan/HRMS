@@ -66,6 +66,7 @@ const ActivityLog = () => {
     <Paper
       elevation={0}
       sx={{
+        height: "360px",
         padding: 3,
         paddingBottom: 6,
         flex: 3,
@@ -74,7 +75,7 @@ const ActivityLog = () => {
         boxSizing: "border-box",
       }}
     >
-      <Typography sx={{ paddingLeft: 1 }} variant="h4">
+      <Typography sx={{ paddingLeft: 1 }} variant="h5">
         Activity log
       </Typography>
 

@@ -48,7 +48,7 @@ const Theme = createTheme({
       textTransform: "none",
     },
     caption: {
-      fontSize: "0.9rem",
+      fontSize: "0.8rem",
       color: "#707070"
     },
     overline: {

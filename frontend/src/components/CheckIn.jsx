@@ -20,6 +20,7 @@ const CheckIn = () => {
         }}>
           <Button variant='outlined' onClick={handleClick}
              sx={{
+              fontSize: "0.9rem",
             borderColor: `${buttonColor}`,
             color: `${buttonColor}`,
             '&:hover': {

@@ -26,15 +26,15 @@ const Dashboard = () => {
 
       {/* Welcome message */}
       <Box sx={{
-        marginY: 3,
+        marginBottom: 3,
         marginBottom: 4,
         display: "flex",
         alignItems: "center",
         gap: 2
       }}>
-        <Avatar sx={{height: "70px", width: "70px"}}/>
+        <Avatar sx={{height: "60px", width: "60px"}}/>
         <Box>
-          <Typography variant="h3">Hello, {user.username}</Typography>
+          <Typography variant="h4">Hello, {user.username}</Typography>
           <Typography variant="subtitle2">{capitalizeFirstLetter(user.role)}</Typography>
         </Box>
       </Box>
@@ -54,7 +54,7 @@ const Dashboard = () => {
       <Box sx={{
         display: "flex",
         height: "400px",
-        gap: 5
+        gap: 3
       }}>
         {/* Activity log */}
         <ActivityLog />
