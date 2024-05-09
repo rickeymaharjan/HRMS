@@ -1,26 +1,34 @@
-const express = require('express');
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 const {
-createLeave,
-getAllLeaves,
-updateLeave,
-deleteLeave,
-getLeaveById
-} = require('../controllers/leaveController');
+  getAllLeaveRequests,
+  getLeaveRequestById,
+  createLeaveRequest,
+  deleteLeaveRequest,
+  updateLeaveRequest,
+  getLeaveRequestByUserId,
+} = require("../controllers/leaveController")
+
+const requireAuth = require("../middleware/requireAuth")
+
+router.use(requireAuth)
 
 // Create a leave request
-router.post("/", createLeave);
+router.post("/", createLeaveRequest)
 
 // Get all leave requests
-router.get("/", getAllLeaves);
+router.get("/", getAllLeaveRequests)
 
 //Get leave by user ID
-router.get("/user/userID", getLeaveById)
+router.get("/user", getLeaveRequestByUserId)
+
+//Get leave by ID
+router.get("/:id", getLeaveRequestById)
 
 // Update a leave request
-router.patch("/:id", updateLeave);
+router.patch("/:id", updateLeaveRequest)
 
-//Delete a leave 
-router.delete("/:id", deleteLeave)
+//Delete a leave
+router.delete("/:id", deleteLeaveRequest)
 
-module.exports = router;
+module.exports = router
