@@ -5,7 +5,7 @@ const InfoCard = ({title, amount, img}) => {
         <Paper elevation={0} sx={{
             display: "flex",
             flex: 1,
-            height: "110px",
+            height: "120px",
             alignItems: "center",
             borderRadius: "15px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.00999)"

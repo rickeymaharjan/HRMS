@@ -8,17 +8,17 @@ const Calendar = () => {
     return (
         <Paper elevation={0} sx={{
             padding: 3,
-            height: "360px",
-            flex: 1,
+            height: "100%",
+            flex: 1.5,
             borderRadius: "15px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.00999)"
         }}>
             <Typography sx={{paddingLeft: 2}} variant="h5">Calendar</Typography>
 
             {/* Calendar */}
-            <Box sx={{ height: "100%" }}>
+            <Box sx={{ height: "100%" , display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateCalendar sx={{ width: "100%", height: "100%"}} />
+                    <DateCalendar />
                 </LocalizationProvider>
             </Box>
         </Paper>

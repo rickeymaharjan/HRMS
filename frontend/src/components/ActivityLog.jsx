@@ -66,7 +66,7 @@ const ActivityLog = () => {
     <Paper
       elevation={0}
       sx={{
-        height: "360px",
+        height: "100%",
         padding: 3,
         paddingBottom: 6,
         flex: 3,
