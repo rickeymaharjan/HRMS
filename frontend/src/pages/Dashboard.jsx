@@ -17,8 +17,7 @@ const Dashboard = () => {
   return (
     <Box sx={{
       marginX: "0",
-      // border: "1px solid black",
-      height: "100vh",
+      height: "100%",
       padding: "40px",
       display: "flex",
       flexDirection: "column"
@@ -32,7 +31,7 @@ const Dashboard = () => {
         alignItems: "center",
         gap: 2
       }}>
-        <Avatar sx={{height: "65px", width: "65px"}}/>
+        <Avatar sx={{height: "60px", width: "60px"}}/>
         <Box>
           <Typography variant="h4">Hello, {user.username}</Typography>
           <Typography variant="subtitle2">{capitalizeFirstLetter(user.role)}</Typography>
@@ -53,7 +52,7 @@ const Dashboard = () => {
       {/* Activity log and Calendar */}
       <Box sx={{
         display: "flex",
-        height: "410px",
+        height: "400px",
         gap: 3,
       }}>
         {/* Activity log */}
