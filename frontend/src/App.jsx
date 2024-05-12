@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
 import Payments from "./pages/Payments";
 import LeaveRequest from "./pages/LeaveRequest";
-
+import Attendance from "./pages/Attendance";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound"
@@ -28,7 +28,7 @@ function Content() {
   const { user } = useAuthContext();
 
   // Define an array of all defined routes
-  const definedRoutes = ["/", "/dashboard", "/users", "/payments", "/leave-request", "/login", "/signup"];
+  const definedRoutes = ["/", "/dashboard", "/users", "/payments", "/leave-request", "/login", "/signup", "/attendance"];
 
   // Check if the current route is defined or not
   const hideSidebar = !definedRoutes.includes(location.pathname) || ["/login", "/signup"].includes(location.pathname);
@@ -45,6 +45,10 @@ function Content() {
           <Route
             path="/dashboard"
             element={user ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/attendance"
+            element={user ? <Attendance /> : <Navigate to="/login" />}
           />
           <Route
             path="/users"
