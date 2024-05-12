@@ -3,6 +3,7 @@ const LeaveRequest = require("../models/leaveModel")
 
 const getAllLeaveRequests = (req, res) => {
   LeaveRequest.find({})
+    .sort({ updatedAt: -1 })
     .then((leaves) => {
       return res.status(200).json(leaves)
     })
@@ -38,11 +39,11 @@ const getLeaveRequestByUserId = (req, res) => {
 
   const user_id = req.user._id
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(user_id)) {
     return res.status(404).json({ error: "No such leave" })
   }
 
-  LeaveRequest.findById(id)
+  LeaveRequest.find({ user_id: user_id })
     .then((leave) => {
       if (!leave) {
         return res.status(404).json({ error: "Leave not found" })

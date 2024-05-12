@@ -1,10 +1,12 @@
 import { useAuthContext } from "./useAuthContext"
 import { useActivitiesContext } from "./useActivitiesContext"
+import { useLeaveRequestsContext } from "./useLeaveRequestsContext"
 import axios from "axios"
 
 export const useLogout = () => {
   const { dispatch, user } = useAuthContext()
   const { dispatch: activityDispatch } = useActivitiesContext()
+  const { dispatch: LeaveDispatch } = useLeaveRequestsContext()
 
   const logout = () => {
     const headers = {
@@ -28,6 +30,7 @@ export const useLogout = () => {
       console.log(error)
     })
     
+    LeaveDispatch({type: "SET_REQUEST", payload: []})
     localStorage.removeItem("user")
     dispatch({ type: "LOGOUT" })
   }

@@ -12,6 +12,10 @@ export const requestsReducer = (state, action) => {
       return {
         requests: [action.payload, ...state.requests],
       };
+    case "UPDATE_REQUEST":
+      return {
+        request: [action.payload, ...state.requests.filter(request => request._id !== action.payload._id)],
+      };
     default:
       return state;
   }

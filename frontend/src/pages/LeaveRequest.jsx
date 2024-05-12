@@ -10,15 +10,25 @@ const LeaveRequest = () => {
   const { user } = useAuthContext()
   const { requests, dispatch } = useLeaveRequestsContext()
 
+
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await axios.get(`/api/leave/user`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        dispatch({ type: "SET_REQUEST", payload: response.data });
+        if (user.role == "manager") {
+          const response = await axios.get(`/api/leave`, {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          });
+          dispatch({ type: "SET_REQUEST", payload: response.data });
+        } else {
+          const response = await axios.get(`/api/leave/user`, {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          });
+          dispatch({ type: "SET_REQUEST", payload: response.data });
+        }
       } catch (error) {
         console.error("Error fetching requests:", error);
       }
@@ -43,20 +53,24 @@ const LeaveRequest = () => {
         flexDirection: "column"
       }}
     >
-      {pendingRequests.length > 0 && (
+      {pendingRequests && pendingRequests.length > 0 && (
         <>
           <Typography variant="h5" sx={{marginBottom: 2}}>Pending Request</Typography>
-          {pendingRequests.map((request) => (
-            <RequestCard key={request._id} request={request} />
+          {pendingRequests.map((pendingRequest) => (
+            <RequestCard key={pendingRequest._id} request={pendingRequest} />
           ))}
         </>
       )}
 
       <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <Typography variant="h5" sx={{marginTop: 2, marginBottom: 2}}>All Requests</Typography>
-        <LeaveRequestForm />
+        {user.role !== "manager" && (
+        <>
+          <Typography variant="h5" sx={{marginTop: 2, marginBottom: 2}}>All Requests</Typography>
+          <LeaveRequestForm />
+        </>
+        )}
       </Box>
-        {requests && requests.filter(request => request.status !== "pending").map((request) => (
+        {user.role != "manager" && requests && requests.filter(request => request.status !== "pending").map((request) => (
           <RequestCard key={request._id} request={request} />
         ))}
     </Box>
@@ -64,3 +78,5 @@ const LeaveRequest = () => {
 }
 
 export default LeaveRequest
+
+
