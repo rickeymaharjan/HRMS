@@ -40,8 +40,10 @@ const getPaymentById = (req, res) => {
       });
   };
  
-  module.exports = {
-    getPaymentById,
-    createPayment,
+module.exports = {
+  getPaymentById,
+  createPayment,
 
-  };
+};
+
+ 
