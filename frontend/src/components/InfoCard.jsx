@@ -5,7 +5,7 @@ const InfoCard = ({title, amount, img}) => {
         <Paper elevation={0} sx={{
             display: "flex",
             flex: 1,
-            height: "150px",
+            height: "120px",
             alignItems: "center",
             borderRadius: "15px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.00999)"
@@ -19,10 +19,10 @@ const InfoCard = ({title, amount, img}) => {
                 alignItems: "center"
                 // backgroundColor: "gray"
 
-            }}><img width="65" height="65" src={img}/></Box>
+            }}><img width="50" height="50" src={img}/></Box>
             <Box sx={{
             }}>
-                <Typography variant="h3">{amount}</Typography>
+                <Typography variant="h4">{amount}</Typography>
                 <Typography variant="subtitle2">{title}</Typography>
             </Box>
         </Paper>

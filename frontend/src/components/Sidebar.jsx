@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, LogOut, CircleUserRound, HandCoins, Mail } from "lucide-react";
+import { LayoutDashboard, LogOut, CircleUserRound, HandCoins, Mail, Calendar } from "lucide-react";
 import { useLogout } from '../hooks/useLogout';
+
 
 const SidebarItem = ({ icon, text, to }) => {
   const location = useLocation();
@@ -44,6 +45,11 @@ const Sidebar = () => {
             icon={<LayoutDashboard size={20} />} 
             text="Dashboard" 
             to="/dashboard" 
+          />
+          <SidebarItem 
+            icon={<Calendar size={20} />} 
+            text="Attendance" 
+            to="/attendance" 
           />
           <SidebarItem 
             icon={<CircleUserRound size={20} />} 

@@ -28,9 +28,9 @@ export const useLogin = () => {
         // Add the activity to the database
         axios.post("api/activity/add", {username, activity_type}, {headers})
           .then(activity => {
-            const { date } = activity
+            const { date, _id } = activity
             // Update the state of activities
-            activityDispatch({type: "CREATE_ACTIVITY", payload: {user_id, username, date}})
+            activityDispatch({type: "CREATE_ACTIVITY", payload: {_id, user_id, username, date}})
           })
           .catch(error => {
             console.log(error)

@@ -6,6 +6,7 @@ const userRoutes = require("./routes/users")
 const attendanceRoutes = require("./routes/attendance")
 const activityRoutes = require("./routes/activity")
 const paymentRoutes = require("./routes/payment")
+const leaveRoutes = require("./routes/leave")
 
 // Express app
 const app = express()
@@ -29,6 +30,7 @@ app.use("/api/users", userRoutes)
 app.use("/api/attendance", attendanceRoutes)
 app.use("/api/activity", activityRoutes)
 app.use("/api/payment", paymentRoutes)
+app.use("/api/leave", leaveRoutes)
 
 app.get("/", (req, res) => {
   return res.json({ hello: "world" })

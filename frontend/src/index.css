@@ -13,6 +13,7 @@
 }
 
 .pages {
+  height: 100vh;
   flex: 1;
   background-color: #f9fafb;
 }
