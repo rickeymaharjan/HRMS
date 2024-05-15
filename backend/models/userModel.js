@@ -45,6 +45,13 @@ const userSchema = new Schema(
         required: true,
       },
     },
+    salary: {
+      type: Number,
+      default: 30000,
+    },
+    lastPaid: {
+      type: Date,
+    },
   },
   { timestamps: true }
 )

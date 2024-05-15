@@ -45,8 +45,7 @@ export const useLogin = () => {
       })
       .catch((error) => {
         setIsLoading(false)
-        console.log(error)
-        // setError(error.response.data.error)
+        setError(error.response.data.error)
       })
   }
 
