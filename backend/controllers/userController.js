@@ -24,8 +24,6 @@ const getAll = (req, res) => {
 // Getting a user
 const getUser = (req, res) => {
   const { id } = req.params
-
-  // Checking if the id is valid or not
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Invalid user ID" })
   }
@@ -43,43 +41,37 @@ const getUser = (req, res) => {
     })
 }
 
-// Creating a user
 const createUser = async (req, res) => {
-  const { username, email, password, gender } = req.body
-  const role = "employee"
-  const shifts = { startTime: "09:00", endTime: "17:00" }
-  const status = "working"
+  const { username, email, phoneNumber, shifts, gender } = req.body;
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash("1234", salt);
+    console.log("trigger")
 
-  // Generate salt and hash the password
-  const salt = await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash(password, salt)
+    // Create a new user instance
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+      phoneNumber,
+      shifts,
+      gender,
+    });
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
-  const newUser = new User({
-    username,
-    email,
-    password: hashedPassword,
-    gender,
-    role,
-    status,
-    shifts,
-  })
 
-  newUser
-    .save()
-    .then((user) => {
-      res.status(201).json(user)
-    })
-    .catch((error) => {
-      console.error("Error creating user:", error)
-      res.status(500).json({ error: "Internal server error" })
-    })
-}
+
 
 // Deleting a user
 const deleteUser = (req, res) => {
   const { id } = req.params
 
-  // Checking if the id is valid or not
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Invalid user ID" })
   }

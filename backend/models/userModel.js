@@ -18,22 +18,28 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
+      default: "1234",
       required: true,
     },
     role: {
       type: String,
-      enum: ["employee", "manager"],
+      enum: ["Employee", "Manager"],
+      default: "Employee",
       required: true,
     },
     gender: {
       type: String,
-      enum: ["male", "female"],
+      enum: ["Male", "Female", "Other"],
+      required: true,
+    },
+    phoneNumber: {
+      type: Number,
       required: true,
     },
     status: {
       type: String,
-      enum: ["onLeave", "working"],
-      default: "working",
+      enum: ["On Leave", "Working"],
+      default: "Working",
     },
     shifts: {
       startTime: {

@@ -13,12 +13,9 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize"
 import { styled } from "@mui/system"
-import axios from "axios"
-
 import { useLeaveRequestsContext } from "../hooks/useLeaveRequestsContext"
-import { useState } from "react"
-import { useAuthContext } from "../hooks/useAuthContext"
 
+import { useState } from "react"
 
 // Styled Textarea
 const blue = {
@@ -60,9 +57,7 @@ const Textarea = styled(BaseTextareaAutosize)(
 
 // Leave request form
 export default function LeaveRequestForm() {
-  const { requests, dispatch } = useLeaveRequestsContext();
-  const { user } = useAuthContext()
-
+  const { requests } = useLeaveRequestsContext();
   const [open, setOpen] = useState(false)
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
@@ -97,47 +92,18 @@ export default function LeaveRequestForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    const username = user.username
-    
+    console.log(title, startDate, endDate, description)
     if (!title, !startDate, !endDate, !description) {
       setError("Fill out all the fields before submitting.")
       return
     }
 
-    const newRequest = {
-      username,
-      title,
-      startDate,
-      endDate,
-      description
-    }
-
-    try {
-      axios.post(`/api/leave`, newRequest, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then(response => {
-        dispatch({ type: "CREATE_REQUEST", payload: response.data });
-        setTitle("")
-        setDescription("")
-        setStartDate(null)
-        setEndDate(null)
-        setError("")
-        handleClose()
-      })
-      .catch(error => {
-        console.error("Error posting request:", error);
-        setError("Error posting request.")
-      });
-    } catch (error) {
-      console.error("Error posting requests:", error);
-      setError("Error posting request.")
-    }
-
-
+    setTitle("")
+    setDescription("")
+    setStartDate(null)
+    setEndDate(null)
+    setError("")
+    handleClose()
   }
 
   return (
@@ -167,7 +133,7 @@ export default function LeaveRequestForm() {
             // dividers
             sx={{
               paddingBottom: 0,
-              paddingX: "30px"
+              paddingX: "30px", // Adjust padding as needed
             }}
           >
             {/* Title Field */}
@@ -182,13 +148,13 @@ export default function LeaveRequestForm() {
               value={title}
               sx={{
                 fontSize: "0.8rem",
-                marginBottom: 1.5,
+                marginBottom: 1,
               }}
               onChange={(e) => setTitle(e.target.value)}
             />
 
             {/* Date picker */}
-            <Box sx={{ display: "flex", gap: 1.5, marginBottom: 1.5 }}>
+            <Box sx={{ display: "flex", gap: 1, marginBottom: 1 }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Start Date"
@@ -221,7 +187,6 @@ export default function LeaveRequestForm() {
             {error && 
               <Alert severity="error">{error}</Alert>
             }
-
           </DialogContent>
 
           <DialogActions
@@ -240,4 +205,3 @@ export default function LeaveRequestForm() {
     </>
   )
 }
-
