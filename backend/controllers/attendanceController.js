@@ -46,11 +46,12 @@ const createAttendance = (req, res) => {
           .json({ error: "Attendance already exists for today" })
       } else {
         // If attendance doesn't exist for today, create a new attendance entry
-        const { status } = req.body
+        const { status, username } = req.body
 
         const newAttendance = new Attendance({
           status,
           user_id,
+          username,
           date: new Date(), // Use current date
         })
 
@@ -139,15 +140,52 @@ const getAttendanceByDate = (req, res) => {
 }
 
 const getAttendanceByUserId = (req, res) => {
-  const { userId } = req.params
+  const user_id = req.user._id
 
-  Attendance.find({ user_id: userId })
+  Attendance.find({ user_id: user_id })
     .sort({ createdAt: -1 })
     .then((attendances) => {
       return res.status(200).json(attendances)
     })
     .catch((error) => {
       return res.status(404).json({ error: "No attendances found." })
+    })
+}
+
+const getAttendanceByDateAndUser = (req, res) => {
+  const { date } = req.params
+  const user_id = req.user._id
+
+  // Parse the date string to a JavaScript Date object
+  const requestedDate = new Date(date)
+
+  if (isNaN(requestedDate)) {
+    return res.status(400).json({ error: "Invalid date format." })
+  }
+
+  // Set the start of the requested date to 00:00:00
+  requestedDate.setHours(0, 0, 0, 0)
+
+  // Set the end of the requested date to 23:59:59
+  const endDate = new Date(requestedDate)
+  endDate.setHours(23, 59, 59, 999)
+
+  Attendance.find({
+    user_id,
+    createdAt: { $gte: requestedDate, $lte: endDate },
+  })
+    .sort({ createdAt: -1 })
+    .then((attendances) => {
+      if (attendances.length > 0) {
+        return res.status(200).json(attendances)
+      } else {
+        return res.status(404).json({
+          error: "No attendances found for the specified user and date.",
+        })
+      }
+    })
+    .catch((error) => {
+      return res.status(500).json({ error: "Internal server error." })
     })
 }
 
@@ -159,4 +197,5 @@ module.exports = {
   updateAttendance,
   getAttendanceByUserId,
   getAttendanceByDate,
+  getAttendanceByDateAndUser,
 }

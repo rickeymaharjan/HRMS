@@ -21,8 +21,8 @@ export const useLogout = () => {
     axios.post("api/activity/add", {username, activity_type}, {headers})
     .then(activity => {
       // Update the state of activities
-      const { date } = activity
-      activityDispatch({type: "CREATE_ACTIVITY", payload: {user_id, username, date}})
+      const { date, _id } = activity
+      activityDispatch({type: "CREATE_ACTIVITY", payload: {_id, user_id, username, date}})
       console.log("Activity recorded: LOGOUT")
     })
     .catch(error => {

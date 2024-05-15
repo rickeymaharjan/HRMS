@@ -14,7 +14,7 @@ const LeaveRequest = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        if (user.role == "manager") {
+        if (user.role == "Manager") {
           const response = await axios.get(`/api/leave`, {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -63,14 +63,14 @@ const LeaveRequest = () => {
       )}
 
       <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        {user.role !== "manager" && (
+        {user.role !== "Manager" && (
         <>
           <Typography variant="h5" sx={{marginTop: 2, marginBottom: 2}}>All Requests</Typography>
           <LeaveRequestForm />
         </>
         )}
       </Box>
-        {user.role != "manager" && requests && requests.filter(request => request.status !== "pending").map((request) => (
+        {user.role != "Manager" && requests && requests.filter(request => request.status !== "pending").map((request) => (
           <RequestCard key={request._id} request={request} />
         ))}
     </Box>

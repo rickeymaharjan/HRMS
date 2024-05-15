@@ -59,7 +59,7 @@ const RequestCard = ({ request }) => {
         }}>
             <Box>
                 <Typography variant="h6" sx={{marginBottom: 1}}>{request.title}</Typography>
-                {user.role == "manager" && <Typography variant="subtitle1"><strong>Employee: </strong>{request.username}</Typography>}
+                {user.role == "Manager" && <Typography variant="subtitle1"><strong>Employee: </strong>{request.username}</Typography>}
                 <Typography variant="subtitle1"><strong>Duration: </strong>{startDate} to {endDate}</Typography>
                 <Typography variant="subtitle1"><strong>Description: </strong>{request.description}</Typography>
                 {request.reviewedBy && <Typography variant="subtitle1"><strong>Reviewed by: </strong> {request.reviewedBy}</Typography>}
@@ -67,7 +67,7 @@ const RequestCard = ({ request }) => {
             </Box>
 
             <Box>
-                {user.role != "manager" &&
+                {user.role != "Manager" &&
                     <Typography variant="subtitle1" sx={{
                         background: getStatusColor(request.status),
                         paddingY: 0.5,
@@ -78,7 +78,7 @@ const RequestCard = ({ request }) => {
                     </Typography>
                 }
 
-                {user.role == "manager" && 
+                {user.role == "Manager" && 
                     <Stack direction="row" spacing={1}>
                         <Button variant="outlined" size="small" color="success" onClick={handleApprove}>Approve</Button>
                         <Button variant="outlined" size="small" color="error" onClick={handleReject}>Reject</Button>
