@@ -22,6 +22,9 @@ const paymentSchema = new mongoose.Schema(
     paidBy: {
       type: String,
     },
+    status: {
+      type: String,
+    },
   },
   { timestamps: true }
 )

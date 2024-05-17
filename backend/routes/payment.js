@@ -7,11 +7,15 @@ const {
   getPaymentByUserId,
   updatePayment,
   deletePayment,
+  getPayments,
 } = require("../controllers/paymentController")
 
 const requireAuth = require("../middleware/requireAuth")
 
 router.use(requireAuth)
+
+// get all payments
+router.get("/", getPayments)
 
 //  get payment by ID
 router.get("/:id", getPaymentById)
